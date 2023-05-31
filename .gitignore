@@ -150,3 +150,12 @@ cython_debug/
 
 # Local History for Visual Studio Code
 .history/
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/ecephys_etl_pipelines/FileContentIndex/5ed66d70-26ff-4970-99a7-59c4d486de4f.vsidx
+.vs/ecephys_etl_pipelines/FileContentIndex/9f5ec27f-36d0-421a-9b9e-f0022d49ecc2.vsidx
+.vs/ecephys_etl_pipelines/FileContentIndex/26183d9b-f992-42df-9b7a-4945e6acf42e.vsidx
+.gitignore
+.vs/ecephys_etl_pipelines/FileContentIndex/addc9da8-ae0f-43c4-aeb8-b0ade6a7fccf.vsidx
+.vs/ecephys_etl_pipelines/FileContentIndex/read.lock
+.vs/ecephys_etl_pipelines/v17/.wsuo

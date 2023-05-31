@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-def get_stimulus_presentations(data, stimulus_timestamps) -> pd.DataFrame:
+def get_stimulus_presentations(data, stimulus_timestamps, frame_offset:int=0) -> pd.DataFrame:
     """
     This function retrieves the stimulus presentation dataframe and
     renames the columns, adds a stop_time column, and set's index to
@@ -24,6 +24,7 @@ def get_stimulus_presentations(data, stimulus_timestamps) -> pd.DataFrame:
         columns={'frame': 'start_frame',
                  'time': 'start_time',
                  'flash_number': 'stimulus_presentations_id'})
+
     stimulus_table.start_time = [stimulus_timestamps[int(start_frame)]
                                  for start_frame in
                                  stimulus_table.start_frame.values]
@@ -156,7 +157,6 @@ def get_visual_stimuli_df(data, time) -> pd.DataFrame:
             )
 
             for idx, (epoch_start, epoch_end,) in enumerate(draw_epochs):
-
                 visual_stimuli_data.append({
                     "orientation": orientation,
                     "image_name": image_name,

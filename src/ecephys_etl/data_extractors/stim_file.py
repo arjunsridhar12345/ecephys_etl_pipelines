@@ -2,7 +2,7 @@ from typing import List, Union
 
 import pandas as pd
 import numpy as np
-
+import datetime
 
 class CamStimOnePickleStimFile(object):
 
@@ -15,7 +15,11 @@ class CamStimOnePickleStimFile(object):
         """Get an array of interval times (in ms) between stimulus
         presentations
         """
-        return np.array(self._data["intervalsms"])
+        print(self._data.keys())
+        if 'intervalsms' not in self._data:
+            return np.array(self._data['items']['behavior']['intervalsms'])
+        else:
+            return np.array(self._data["intervalsms"])
 
     @property
     def num_frames(self) -> int:
@@ -39,6 +43,18 @@ class CamStimOnePickleStimFile(object):
         """Time (s) before initial stimulus presentation
         """
         return self._data["pre_blank_sec"]
+
+    @property
+    def start_time(self) -> datetime.datetime:
+        """ Gets the start time from the pkl session"""
+        start_time = self._data['start_time']
+        if not isinstance(start_time, datetime.datetime):
+            if isinstance(start_time, float):
+                start_time = datetime.datetime.fromtimestamp(start_time)
+            else:
+                raise TypeError('Start time of mapping stimulus is not in right format (datetime or float)')
+
+        return start_time
 
     @property
     def angular_wheel_velocity(self):
@@ -124,6 +140,18 @@ class BehaviorPickleFile(object):
     def num_frames(self) -> int:
         """Get the number of stimulus frames presented during pkl session."""
         return len(self.presentation_intervals) + 1
+
+    @property
+    def start_time(self) -> datetime.datetime:
+        """ Gets the start time from the pkl session"""
+        start_time = self._data['start_time']
+        if not isinstance(start_time, datetime.datetime):
+            if isinstance(start_time, float):
+                start_time = datetime.datetime.fromtimestamp(start_time)
+            else:
+                raise TypeError('Start time of behavior stimulus is not in right format (datetime or float)')
+
+        return start_time
 
     @property
     def reward_frames(self) -> np.ndarray:
